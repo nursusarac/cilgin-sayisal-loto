@@ -1,0 +1,106 @@
+
+============================================================
+LOTTERY DRAW DATA ANALYSIS
+============================================================
+
+Project overview
+----------------
+This project analyzes historical lottery draw data, compares
+number-selection strategies, evaluates them using a holdout
+test set, and checks selected records against manually
+provided official results.
+
+Important limitations
+---------------------
+- Lottery draws are random events.
+- Historical number frequencies do not establish that a
+  number is more likely to appear in a future draw.
+- Strategy comparisons are retrospective and do not
+  guarantee future performance.
+- Official verification covers only the records included
+  in the verification file; it does not validate the
+  entire historical dataset.
+
+
+============================================================
+Strategy Comparison
+============================================================
+
+          method  test_draws  total_hits  average_hits  draws_with_1_or_more  draws_with_2_or_more  random_baseline  difference_from_random
+   Last 20 draws         146          65      0.445205                    57                     8         0.369863                0.075342
+   Last 50 draws         146          62      0.424658                    53                     9         0.369863                0.054795
+     All history         146          57      0.390411                    52                     5         0.369863                0.020548
+  Last 100 draws         146          55      0.376712                    49                     5         0.369863                0.006849
+Random selection         146          54      0.369863                    48                     6         0.369863                0.000000
+  Last 200 draws         146          52      0.356164                    49                     3         0.369863               -0.013699
+
+============================================================
+Window Selection
+============================================================
+
+          method  test_draws  total_hits  average_hits  draws_with_1_or_more  draws_with_2_or_more  random_baseline  difference_from_random
+   Last 20 draws         146          65      0.445205                    57                     8         0.369863                0.075342
+   Last 50 draws         146          62      0.424658                    53                     9         0.369863                0.054795
+     All history         146          57      0.390411                    52                     5         0.369863                0.020548
+  Last 100 draws         146          55      0.376712                    49                     5         0.369863                0.006849
+Random selection         146          54      0.369863                    48                     6         0.369863                0.000000
+  Last 200 draws         146          52      0.356164                    49                     3         0.369863               -0.013699
+
+============================================================
+Final Holdout Test
+============================================================
+
+          method  test_draws  total_hits  average_hits  draws_with_1_or_more  draws_with_2_or_more  random_baseline  theoretical_random_average  difference_from_random selected_window
+   Last 20 draws         147          56      0.380952                    51                     5          0.37415                         0.4                0.006803   Last 20 draws
+Random selection         147          55      0.374150                    50                     4          0.37415                         0.4                0.000000   Last 20 draws
+
+============================================================
+Data Quality
+============================================================
+
+ total_rows  valid_draws  excluded_draws  duplicate_draw_id_rows  missing_number_rows  out_of_range_rows  same_combination_rows  expected_frequency_per_number                                                         source_file
+        975          975               0                       0                    0                  0                      0                           65.0 C:\Users\nursu\OneDrive\Masaüstü\cilgin-sayisal-loto\data\draws.csv
+
+============================================================
+Holdout Test Interpretation
+============================================================
+
+Average hits are descriptive results from the holdout period. Small differences between strategies and a random baseline should not be interpreted as evidence of predictive power.
+
+============================================================
+Verification Against Supplied Official Results
+============================================================
+
+Records checked: 20
+Matching records: 20
+Records requiring review: 0
+
+Match rate among checked records: 100.0%
+
+
+Scope note: This result applies only to the records in this verification file. It does not confirm the accuracy of all historical draws.
+
+
+Detailed verification records:
+
+      date  official_draw_no    status  official_numbers       csv_numbers
+26.10.2026               128 EŞLEŞİYOR 13,22,51,52,60,80 13,22,51,52,60,80
+24.10.2026               127 EŞLEŞİYOR 10,29,43,48,69,79 10,29,43,48,69,79
+21.10.2026               126 EŞLEŞİYOR  8,33,36,53,70,80  8,33,36,53,70,80
+19.10.2026               125 EŞLEŞİYOR 52,65,78,79,86,87 52,65,78,79,86,87
+17.10.2026               124 EŞLEŞİYOR  6,19,39,59,75,85  6,19,39,59,75,85
+14.10.2026               123 EŞLEŞİYOR   1,3,65,66,79,81   1,3,65,66,79,81
+12.10.2026               122 EŞLEŞİYOR  2,16,18,38,75,79  2,16,18,38,75,79
+10.10.2026               121 EŞLEŞİYOR 14,26,35,45,47,57 14,26,35,45,47,57
+07.10.2026               120 EŞLEŞİYOR 38,40,44,48,63,77 38,40,44,48,63,77
+05.10.2026               119 EŞLEŞİYOR 13,19,29,40,42,79 13,19,29,40,42,79
+30.09.2026               117 EŞLEŞİYOR 21,24,35,36,43,80 21,24,35,36,43,80
+28.09.2026               116 EŞLEŞİYOR  1,23,57,66,88,90  1,23,57,66,88,90
+26.09.2026               115 EŞLEŞİYOR 35,42,44,64,70,87 35,42,44,64,70,87
+23.09.2026               114 EŞLEŞİYOR 10,37,54,69,82,89 10,37,54,69,82,89
+21.09.2026               113 EŞLEŞİYOR  5,30,34,53,64,84  5,30,34,53,64,84
+19.09.2026               112 EŞLEŞİYOR    3,6,9,23,50,89    3,6,9,23,50,89
+16.09.2026               111 EŞLEŞİYOR   3,4,14,24,46,76   3,4,14,24,46,76
+14.09.2026               110 EŞLEŞİYOR 35,51,54,56,66,87 35,51,54,56,66,87
+12.09.2026               109 EŞLEŞİYOR  3,10,23,24,67,75  3,10,23,24,67,75
+09.09.2026               108 EŞLEŞİYOR  8,10,24,25,34,44  8,10,24,25,34,44

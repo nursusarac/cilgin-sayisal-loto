@@ -1,0 +1,2 @@
+﻿total_rows,valid_draws,excluded_draws,duplicate_draw_id_rows,missing_number_rows,out_of_range_rows,same_combination_rows,expected_frequency_per_number,source_file
+975,975,0,0,0,0,0,65.0,C:\Users\nursu\OneDrive\Masaüstü\cilgin-sayisal-loto\data\draws.csv

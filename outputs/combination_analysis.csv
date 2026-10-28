@@ -1,0 +1,3 @@
+﻿method,numbers,odd_count,even_count,range_1_30,range_31_60,range_61_90,total_historical_frequency,average_historical_frequency,sum_of_numbers
+frequency_weighted,"6, 8, 42, 55, 58, 77",2,4,2,3,1,395,65.83,246
+random,"10, 19, 38, 54, 70, 72",1,5,2,2,2,358,59.67,263

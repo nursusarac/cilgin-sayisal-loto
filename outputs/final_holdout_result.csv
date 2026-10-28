@@ -1,0 +1,3 @@
+﻿method,test_draws,total_hits,average_hits,draws_with_1_or_more,draws_with_2_or_more,random_baseline,theoretical_random_average,difference_from_random,selected_window
+Last 20 draws,147,56,0.38095238095238093,51,5,0.3741496598639456,0.4,0.006802721088435326,Last 20 draws
+Random selection,147,55,0.3741496598639456,50,4,0.3741496598639456,0.4,0.0,Last 20 draws
