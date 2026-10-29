@@ -1,14 +1,14 @@
 # Lottery Draw Data Analysis
 
-A Python-based data analysis project exploring historical Çılgın Sayısal Loto (6/90) results, examining number frequencies, validating data quality, and evaluating simple number-selection strategies through chronological backtesting.
+A Python-based data analysis project exploring historical Çılgın Sayısal Loto (6/90) results. The project examines number frequencies, validates data quality, and evaluates simple number-selection strategies through chronological backtesting.
 
 ## Project Overview
 
-This project investigates historical lottery draw data to practice data collection, data cleaning, exploratory data analysis, and basic model evaluation.
+This project explores historical lottery data to practice data collection, data validation, exploratory data analysis, and basic model evaluation.
 
-The analysis compares historical-frequency strategies with a random-selection baseline and evaluates the selected strategy on a separate holdout period.
+It compares historical-frequency strategies with a random-selection baseline and evaluates the selected strategy on a separate holdout period.
 
-**Important:** Lottery draws are random. Historical frequencies do not establish that a number is more likely to appear in a future draw. This project is for analytical and educational purposes, not a reliable lottery prediction system.
+**Important:** Lottery draws are random. Historical frequencies do not establish that a number is more likely to appear in a future draw. This project is an educational data-analysis exercise, not a reliable prediction system.
 
 ## Objectives
 
@@ -17,45 +17,40 @@ The analysis compares historical-frequency strategies with a random-selection ba
 - Explore number frequencies and odd/even distributions.
 - Compare selection strategies using chronological backtesting.
 - Evaluate a selected strategy against a random baseline on a holdout set.
-- Verify a sample of historical records against manually supplied official results.
+- Verify a sample of historical records against official results.
 
 ## Tools and Technologies
 
 - Python
-- Pandas
+- Pandas and NumPy
 - Matplotlib
-- Requests
-- Beautiful Soup
+- Requests and Beautiful Soup
 - CSV data processing
 - Exploratory data analysis
 - Chronological backtesting
 
 ## Dataset and Data Quality
 
-The current dataset contains **975 structurally valid draw records**.
-
-The validation checks found no invalid main-number rows, duplicate draw IDs, or repeated six-number combinations in the dataset.
+The dataset contains **975 draw records**. Structural checks found no invalid main-number rows, duplicate draw IDs, or repeated six-number combinations.
 
 These checks establish structural consistency, not the accuracy of every historical result. A sample of 20 records was compared with official results supplied for verification; all 20 matched. The remaining historical records have not all been independently verified.
 
 ## Strategy Evaluation
 
-The project compares historical-frequency selection using different lookback windows with a random-selection baseline.
+The chronological evaluation uses:
 
-The current chronological test uses:
 - 682 draws as initial history
 - 146 draws for strategy selection
 - 147 draws for the final holdout test
 
 On the final holdout set, the selected last-20-draw frequency strategy recorded 56 total main-number hits, while the random baseline recorded 55.
 
-This small difference is descriptive and does **not** demonstrate predictive power or a reliable advantage over random selection.
-
-For a uniform random selection of six distinct numbers from 1 to 90, the theoretical expected number of main-number matches per draw is 0.4.
+This small difference does **not** demonstrate predictive power or a reliable advantage over random selection. For a uniform random selection of six distinct numbers from 1 to 90, the theoretical expected number of main-number matches per draw is 0.4.
 
 ## Project Outputs
 
 The `outputs/` directory includes:
+
 - Number-frequency analysis and chart
 - Odd/even distribution
 - Data-quality summary
@@ -64,7 +59,11 @@ The `outputs/` directory includes:
 - Final holdout-test results
 - Official-record verification
 - Generated example combinations
+- Combination-frequency analysis
 - Text-based project report
+- Historical backtest output (`model_backtest.csv`)
+
+The historical backtest file is retained as a project output; its generation method has not yet been reconciled with the current evaluation workflow.
 
 ## Project Structure
 
@@ -77,10 +76,12 @@ cilgin-sayisal-loto/
 │   ├── analyze_draws.py
 │   ├── test_model.py
 │   ├── generate_numbers.py
+│   ├── predict_next.py
 │   ├── create_report.py
 │   └── verify_draws.py
 ├── outputs/
 ├── README.md
+└── requirements.txt
 ```
 
 ## Limitations
@@ -88,8 +89,9 @@ cilgin-sayisal-loto/
 - Lottery outcomes are random and cannot be reliably predicted from historical frequencies.
 - Historical archive data may contain inaccuracies.
 - Official verification currently covers only a limited sample.
-- Backtest results may vary depending on the dataset, testing period, and random baseline.
-- The current random baseline uses one reproducible random combination per test draw, so it is subject to sampling variability.
+- Backtest results depend on the dataset, evaluation period, and random baseline.
+- The random baseline uses one reproducible random combination per test draw and is subject to sampling variability.
+- The historical `model_backtest.csv` output has not yet been reconciled with the current evaluation workflow.
 
 ## Future Improvements
 
