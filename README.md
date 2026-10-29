@@ -28,6 +28,7 @@ It compares historical-frequency strategies with a random-selection baseline and
 - CSV data processing
 - Exploratory data analysis
 - Chronological backtesting
+- Git and GitHub
 
 ## Dataset and Data Quality
 
@@ -43,27 +44,24 @@ The chronological evaluation uses:
 - 146 draws for strategy selection
 - 147 draws for the final holdout test
 
-On the final holdout set, the selected last-20-draw frequency strategy recorded 56 total main-number hits, while the random baseline recorded 55.
+On the final holdout set, the selected last-20-draw frequency strategy recorded **56 total main-number hits**, while the random baseline recorded **55**.
 
-This small difference does **not** demonstrate predictive power or a reliable advantage over random selection. For a uniform random selection of six distinct numbers from 1 to 90, the theoretical expected number of main-number matches per draw is 0.4.
+This small difference does not demonstrate predictive power or a reliable advantage over random selection. For a uniformly random selection of six distinct numbers from 1 to 90, the theoretical expected number of main-number matches per draw is 0.4.
 
 ## Project Outputs
 
-The `outputs/` directory includes:
+The `outputs/` directory contains generated analysis results, including:
 
 - Number-frequency analysis and chart
 - Odd/even distribution
 - Data-quality summary
+- Duplicate draw ID and repeated-combination checks
 - Strategy-comparison results
 - Window-selection results
 - Final holdout-test results
 - Official-record verification
-- Generated example combinations
-- Combination-frequency analysis
+- Generated example combinations and their frequency analysis
 - Text-based project report
-- The historical `model_backtest.csv` output has not yet been reconciled with the current evaluation workflow.
-
-The historical backtest file is retained as a project output; its generation method has not yet been reconciled with the current evaluation workflow.
 
 ## Project Structure
 
@@ -81,17 +79,18 @@ cilgin-sayisal-loto/
 │   └── verify_draws.py
 ├── outputs/
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+└── .gitignore
 ```
 
 ## Limitations
 
 - Lottery outcomes are random and cannot be reliably predicted from historical frequencies.
 - Historical archive data may contain inaccuracies.
-- Official verification currently covers only a limited sample.
+- Official verification currently covers only a limited sample of records.
 - Backtest results depend on the dataset, evaluation period, and random baseline.
 - The random baseline uses one reproducible random combination per test draw and is subject to sampling variability.
-- The historical `model_backtest.csv` output has not yet been reconciled with the current evaluation workflow.
+- The holdout result is a comparison on one test period, not proof of a statistically significant advantage.
 
 ## Future Improvements
 
