@@ -2,44 +2,63 @@
 from pathlib import Path
 
 import pandas as pd
-import numpy as np
 
-# Proje klasörünü bul
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "data" / "draws.csv"
 
-# Geçmiş çekilişleri oku
-df = pd.read_csv(DATA_FILE)
+NUMBER_COLS = [f"n{i}" for i in range(1, 7)]
+WINDOW_SIZE = 20
 
-number_cols = [f"n{i}" for i in range(1, 7)]
-numbers = df[number_cols].to_numpy().ravel()
 
-# 1-90 arasındaki her sayının görülme sıklığı
-frequency = (
-    pd.Series(numbers)
-    .value_counts()
-    .reindex(range(1, 91), fill_value=0)
-)
+def main():
+    df = pd.read_csv(DATA_FILE)
 
-# Tahmin stratejisi: geçmiş frekanslarına göre ağırlıklı seçim
-# Bu yöntem bir deneydir; geleceği bildiği anlamına gelmez.
-weights = frequency.to_numpy(dtype=float)
+    # Parse Turkish draw dates and sort chronologically.
+    months = {
+        "Ocak": 1, "Şubat": 2, "Mart": 3, "Nisan": 4,
+        "Mayıs": 5, "Haziran": 6, "Temmuz": 7, "Ağustos": 8,
+        "Eylül": 9, "Ekim": 10, "Kasım": 11, "Aralık": 12,
+    }
 
-# Her sayıya küçük bir başlangıç ağırlığı ver
-weights = weights + 1
+    def parse_date(value):
+        day, month, year = str(value).split()
+        return pd.Timestamp(
+            year=int(year),
+            month=months[month],
+            day=int(day),
+        )
 
-# Aynı kolonda 6 farklı sayı seç
-rng = np.random.default_rng()
-prediction = rng.choice(
-    np.arange(1, 91),
-    size=6,
-    replace=False,
-    p=weights / weights.sum()
-)
+    df["parsed_date"] = df["date"].apply(parse_date)
+    df = df.sort_values("parsed_date").reset_index(drop=True)
 
-prediction = sorted(prediction.tolist())
+    if len(df) <= WINDOW_SIZE:
+        raise ValueError("Not enough historical draws.")
 
-print("\n=== ÇILGIN SAYISAL LOTO TAHMİNİ ===")
-print("Kullanılan geçmiş çekiliş sayısı:", len(df))
-print("Önerilen 6 sayı:", " - ".join(map(str, prediction)))
-print("\nNot: Bu bir istatistiksel denemedir; kazanma garantisi yoktur.")
+    # Use the last 20 draws to rank numbers by frequency.
+    recent_numbers = df.tail(WINDOW_SIZE)[NUMBER_COLS].to_numpy().ravel()
+    frequency = (
+        pd.Series(recent_numbers)
+        .value_counts()
+        .reindex(range(1, 91), fill_value=0)
+    )
+
+    # Deterministic tie-breaking: higher frequency first, then lower number.
+    ranked_numbers = sorted(
+        range(1, 91),
+        key=lambda number: (-int(frequency[number]), number),
+    )
+
+    combination = sorted(ranked_numbers[:6])
+
+    print("\n=== ÇILGIN SAYISAL LOTO ===")
+    print(f"Historical draws used: {len(df)}")
+    print(f"Frequency window: last {WINDOW_SIZE} draws")
+    print("Selected combination:", " - ".join(map(str, combination)))
+    print(
+        "\nNote: This is a historical-frequency selection, "
+        "not a reliable prediction of future results."
+    )
+
+
+if __name__ == "__main__":
+    main()
