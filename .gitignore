@@ -5,3 +5,4 @@ __pycache__/
 venv/
 .env
 .vscode/
+outputs/model_backtest_archive.csv

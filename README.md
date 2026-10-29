@@ -61,7 +61,7 @@ The `outputs/` directory includes:
 - Generated example combinations
 - Combination-frequency analysis
 - Text-based project report
-- Historical backtest output (`model_backtest.csv`)
+- The historical `model_backtest.csv` output has not yet been reconciled with the current evaluation workflow.
 
 The historical backtest file is retained as a project output; its generation method has not yet been reconciled with the current evaluation workflow.
 
